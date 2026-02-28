@@ -10,39 +10,73 @@ Vous aider à :
 - améliorer votre visibilité et vos décisions de sécurité.
 
 ## 🔍 Fonctionnement
-1. Vous interrogez l’API avec un domaine connu.
-2. L’API collecte et agrège l’ensemble des domaines associés.
+1. Vous interrogez l’API avec un domaine connu.  
+2. L’API collecte et agrège l’ensemble des domaines associés.  
 3. Vous récupérez une liste complète, exploitable selon vos outils (SIEM, firewall, EDR, etc.).
 
 ## 🆓 Version Free
-- La version **Free** renvoie **maximum 3 domaines**.
-- La **clé Free** est **limitée en nombre d'usages par jour**.
-- Parfait pour un premier niveau de visibilité ou un test rapide.
+- Renvoie **maximum 3 domaines**
+- Clé API limitée en volume
+- Idéal pour tester ou obtenir une première vue
 
 ## 💎 Version Premium
-La version **Premium** renvoie **tous les domaines** du tenant, sans limite. 
-👉 Pour y accéder, **envoyez‑moi simplement un message privé sur LinkedIn**. [Charles DIEU](https://www.linkedin.com/in/charlesd75/)
+La version Premium renvoie **tous les domaines** du tenant, sans limite.  
+👉 Pour y accéder : **contact LinkedIn**  
+https://www.linkedin.com/in/charlesd75/
 
 ## 💡 Pourquoi c’est utile
-Lorsqu’un tenant partenaire est compromis, vous ne connaissez généralement qu’une petite partie de ses domaines. L’API vous permet d’obtenir **une vision complète**, indispensable pour analyser le risque ou appliquer vos propres actions.
+Lorsqu’un tenant partenaire est compromis, vous ne connaissez souvent qu’un seul domaine. Cette API vous offre une **vision totale** pour évaluer le risque ou automatiser vos actions.
 
 ## ⚠️ Ce que l’API ne fait pas
-- Aucun blocage automatique
-- Aucun filtrage
-- Aucune action sur le tenant
+- Aucun blocage  
+- Aucun filtrage  
+- Aucune action sur le tenant  
 
-## 📦 Format de sortie
-- JSON structuré
-- Compatibilité avec vos outils d’analyse et d’automatisation
+## 📦 Format de sortie  
+- JSON structuré  
+- Compatible SIEM, EDR, automatisation  
 
-## 📘 Exemple d'entrée
+---
+
+# 📚 API Reference
+
+## **POST /api/tenant-domains-free**
+Récupère les domaines associés à un tenant Microsoft à partir d’un domaine connu.
+
+---
+
+## 🔑 Authentication
+```http
+X-Api-Key: free_plan_key
+Content-Type: application/json
+```
+
+## 📤 Request Body
 ```json
+{
+  "domain": "domain.fr"
+}
+```
+
+---
+
+## ▶️ Exemple d’appel (PowerShell)
+```powershell
 $uri  = 'https://tenantdiscover-gvakd7fhcae0a7b9.francecentral-01.azurewebsites.net/api/tenant-domains-free'
 $hdrs = @{ 'X-Api-Key' = 'free_plan_key' }
 $body = '{"domain":"domain.fr"}'
+
+Invoke-RestMethod -Uri $uri -Headers $hdrs -Method Post -Body $body
 ```
 
-## 📘 Exemple de réponse
+## ▶️ Exemple d’appel (cURL)
+```bash
+curl -X POST https://tenantdiscover-gvakd7fhcae0a7b9.francecentral-01.azurewebsites.net/api/tenant-domains-free   -H "X-Api-Key: free_plan_key"   -H "Content-Type: application/json"   -d '{"domain":"domain.fr"}'
+```
+
+---
+
+## 📥 Response (200 OK)
 ```json
 {
   "tenantId": "xxxx-xxxx",
@@ -53,3 +87,13 @@ $body = '{"domain":"domain.fr"}'
   ]
 }
 ```
+
+---
+
+## ❌ Codes d’erreur
+| Code | Description |
+|------|-------------|
+| **400** | Mauvais format ou domaine invalide |
+| **401** | API Key manquante ou invalide |
+| **429** | Limite d’appels atteinte |
+| **500** | Erreur interne |
