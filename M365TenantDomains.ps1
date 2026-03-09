@@ -75,7 +75,7 @@ Idem, en exportant les résultats dans un CSV.
 
         if ($OutCsv) {
             $objects | Export-Csv -NoTypeInformation -Encoding UTF8 -Path $OutCsv
-            Write-Host "Exporté vers $OutCsv (`$($objects.Count)` domaines)."
+            Write-Host "Exporté vers $OutCsv ('$($objects.Count)' domaines)."
         }
 
         # Sortie à l’écran
@@ -91,4 +91,5 @@ Idem, en exportant les résultats dans un CSV.
         Write-Error ("Échec de la découverte pour '{0}' : {1}" -f $Domain, $_.Exception.Message)
     }
 }
+
 
