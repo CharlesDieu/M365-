@@ -73,16 +73,17 @@ Idem, en exportant les résultats dans un CSV.
             }
         }
 
+        
+
+        # Sortie à l’écran
+        #Write-Host "Domaines   : $domain"
+        #Write-Host "TenantName : $tenantName"
+        #Write-Host "TenantId   : $tenantId"
+
         if ($OutCsv) {
             $objects | Export-Csv -NoTypeInformation -Encoding UTF8 -Path $OutCsv
             Write-Host "Exporté vers $OutCsv ('$($objects.Count)' domaines)."
         }
-
-        # Sortie à l’écran
-        #Write-Host "TenantId   : $tenantId"
-        #Write-Host "TenantName : $tenantName"
-        #Write-Host "Domaines   :"
-        #$domains | ForEach-Object { Write-Host " - $_" }
 
         return $objects
     }
@@ -91,6 +92,7 @@ Idem, en exportant les résultats dans un CSV.
         Write-Error ("Échec de la découverte pour '{0}' : {1}" -f $Domain, $_.Exception.Message)
     }
 }
+
 
 
 
