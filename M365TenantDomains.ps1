@@ -76,9 +76,9 @@ Idem, en exportant les résultats dans un CSV.
         
 
         # Sortie à l’écran
-        #Write-Host "Domaines   : $domain"
-        #Write-Host "TenantName : $tenantName"
-        #Write-Host "TenantId   : $tenantId"
+        Write-Host "Domaines   : $domain"
+        Write-Host "TenantName : $tenantName"
+        Write-Host "TenantId   : $tenantId"
 
         if ($OutCsv) {
             $objects | Export-Csv -NoTypeInformation -Encoding UTF8 -Path $OutCsv
@@ -92,6 +92,7 @@ Idem, en exportant les résultats dans un CSV.
         Write-Error ("Échec de la découverte pour '{0}' : {1}" -f $Domain, $_.Exception.Message)
     }
 }
+
 
 
 
