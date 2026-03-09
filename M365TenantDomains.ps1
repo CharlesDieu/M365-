@@ -23,7 +23,7 @@ System.Object (PSCustomObject) — un objet par domaine découvert, avec :
 
 .EXAMPLE
 PS> Get-M365TenantDomains -Domain "contoso.com"
-Interroge l’API et affiche les domaines liés au tenant de swisslife.de.
+Interroge l’API et affiche les domaines liés au tenant de contoso.com.
 
 .EXAMPLE
 PS> Get-M365TenantDomains -Domain "contoso.com" -OutCsv ".\contoso_tenant_domains.csv"
@@ -91,3 +91,4 @@ Idem, en exportant les résultats dans un CSV.
         Write-Error ("Échec de la découverte pour '{0}' : {1}" -f $Domain, $_.Exception.Message)
     }
 }
+
